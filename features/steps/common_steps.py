@@ -48,7 +48,7 @@ def hover_element(context, element_name, element_type):
 @step("I click on (?P<element_name>.+) (?P<element_type>.+)")
 def click_element(context, element_name, element_type):
     get_element(context, element_name, element_type).click()
-    context.page.wait_for_loading()
+    # context.page.wait_for_loading()
     context.page.wait_for_loader_disappear()
 
 

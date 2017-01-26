@@ -43,16 +43,6 @@ def after_all(context):
     if hasattr(context, 'xvfb'):
         context.xvfb.stop()
 
-    if getattr(context.config, 'junit', False):
-        from xml2htmlreport import cli
-
-        cli.run(arguments={
-            'xml_folder': getattr(context.config, 'junit_directory'),
-            'html_folder': os.path.join(getattr(context.config, 'junit_directory'), 'report'),
-            'screen_shots_folder': os.path.join(getattr(context.config, 'junit_directory'), 'screenshots'),
-            'title': 'ClassPass VenuePortal Test Run Report'
-            })
-
 
 def take_screenshot(scenario, step_name):
     scenario_name = scenario.name.replace('@', '')
@@ -63,11 +53,3 @@ def take_screenshot(scenario, step_name):
         dir_name, datetime_part, feature_filename, scenario_name, step_name))
 
 
-def delete_created_items(context):
-    delete_map = {
-    }
-
-    if context.created_items:
-        for item_type, ids in context.created_items.items():
-            for _id in ids:
-                delete_map[item_type](_id)
